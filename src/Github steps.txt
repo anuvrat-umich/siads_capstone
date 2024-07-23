@@ -1,0 +1,17 @@
+#Define main branch (Once, if main doesn't exist and master does)
+git branch -M main
+
+#Add a file to track
+git add <filename>
+
+#Commit changes
+git commit <filenames> -m <commitMessage>
+
+#Push local changes to Github
+git push -u origin <branchName>
+
+#Merge a branch to main
+git checkout main
+git pull origin master
+git merge test
+git push origin master
