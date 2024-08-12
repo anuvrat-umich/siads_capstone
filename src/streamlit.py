@@ -34,13 +34,42 @@ dict_health = {
     "Poor": 5,
 }
 
+from pathlib import Path
+import base64
+
+
+# Function to convert image to base64
+@st.cache_resource
+def get_base64_image(image_file):
+    image_path = Path(image_file).resolve()
+    with open(image_path, "rb") as f:
+        return f"data:image/webp;base64,{base64.b64encode(f.read()).decode()}"
+
+
+background_image = get_base64_image("appdata/backgroundimage2.webp")
+
+# Set the background image with transparency
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
+                    url("{background_image}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Set the app title
 st.title("Risk of Heart Attack / Myocardial Infarction Prediction")
 # Set the app description with a welcome message
 st.markdown(
     "Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins."
 )
-# st.write("Thanks for using our model!")
 
 # Getting user inputs
 st.header("Inputs for Prediction")
@@ -49,7 +78,7 @@ st.header("Inputs for Prediction")
 col1, col2 = st.columns(2)
 
 # Create a radio button for Sex
-rad_SEX = col1.radio("What is your birth sex?", ["Male", "Female"])
+rad_SEX = col1.radio("What is your birth sex?", ["Male", "Female"], index=0)
 dict_sex = {"Male": 1, "Female": 2}
 _SEX = dict_sex[rad_SEX]
 
@@ -57,7 +86,7 @@ _SEX = dict_sex[rad_SEX]
 HTM4 = col1.slider("Height (CM)", 122, 213, 170)
 
 # Create a slider for Weight
-WTKG3 = col1.slider("Weight (KG)", 23.00, 295.00, 100.00)
+WTKG3 = col1.slider("Weight (KG)", 23.00, 295.00, 75.00)
 WTKG3 = WTKG3 * 100
 
 # Calculate BMI
@@ -65,17 +94,18 @@ _BMI5 = int(
     WTKG3 / ((HTM4 / 100) ** 2)
 )  # BMI = weight (kg) / height (m)^2. BMI = weight (g) / height (cm)^2. BMI = weight (g) / height (cm)^2 * 10000
 
-# Create a slider for age
-age = col1.slider("Age", 20, 100, 50)
+# Create a slider for age. Age value collapsed above 80
+age = col1.slider("Age", 20, 100, 65)
 if age > 80:
-    _AGE80 = 1
+    _AGE80 = 80
 else:
-    _AGE80 = 0
+    _AGE80 = age
 
 # Create a radio button for General Health
 rad_GENHLTH = col1.radio(
     "Would you say that in general your health is",
     ["Excellent", "Very good", "Good", "Fair", "Poor"],
+    index=1,
 )
 GENHLTH = dict_health[rad_GENHLTH]
 
@@ -99,6 +129,7 @@ MENTHLTH = col1.slider(
 rad_PERSDOC3 = col1.radio(
     "Do you have one person or a group of doctors you think of as your personal doctor or health care provider?",
     ["Yes", "No"],
+    index=0,
 )
 PERSDOC3 = dict_yes_no[rad_PERSDOC3]
 
@@ -106,6 +137,7 @@ PERSDOC3 = dict_yes_no[rad_PERSDOC3]
 rad_MEDCOST1 = col1.radio(
     "Was there a time in the past 12 months when you needed to see a doctor but could not because you could not afford it?",
     ["Yes", "No"],
+    index=1,
 )
 MEDCOST1 = dict_yes_no[rad_MEDCOST1]
 
@@ -117,13 +149,16 @@ rad_CHECKUP1 = col1.radio(
         "Within past 2 years",
         "Within past 5 years",
         "5 or more years",
+        "Never",
     ],
+    index=0,
 )
 dict_checkup = {
     "Within past year": 1,
     "Within past 2 years": 2,
     "Within past 5 years": 3,
     "5 or more years": 4,
+    "Never": 8,
 }
 CHECKUP1 = dict_checkup[rad_CHECKUP1]
 
@@ -137,7 +172,9 @@ SLEPTIM1 = col1.slider(
 
 # Create a radio button for Angina or Coronary Heart Disease
 rad_CVDCRHD4 = col1.radio(
-    "(Ever told) (you had) angina or coronary heart disease?", ["Yes", "No"]
+    "Have you ever been told by a doctor that you have angina or coronary heart disease?",
+    ["Yes", "No"],
+    index=1,
 )
 CVDCRHD4 = dict_yes_no[rad_CVDCRHD4]
 
@@ -149,6 +186,7 @@ CVDSTRK3 = dict_yes_no[rad_CVDSTRK3]
 rad_CHCOCNC1 = col1.radio(
     "Have you ever been told that you had melanoma or any other types of cancer?",
     ["Yes", "No"],
+    index=1,
 )
 CHCOCNC1 = dict_yes_no[rad_CHCOCNC1]
 
@@ -156,6 +194,7 @@ CHCOCNC1 = dict_yes_no[rad_CHCOCNC1]
 rad_CHCCOPD3 = col1.radio(
     "Ever told you had C.O.P.D. (chronic obstructive pulmonary disease), emphysema or chronic bronchitis?",
     ["Yes", "No"],
+    index=1,
 )
 CHCCOPD3 = dict_yes_no[rad_CHCCOPD3]
 
@@ -163,6 +202,7 @@ CHCCOPD3 = dict_yes_no[rad_CHCCOPD3]
 rad_ADDEPEV3 = col1.radio(
     "Ever told you had a depressive disorder, including depression, major depression, dysthymia, or minor depression?",
     ["Yes", "No"],
+    index=1,
 )
 ADDEPEV3 = dict_yes_no[rad_ADDEPEV3]
 
@@ -178,6 +218,7 @@ CHCKDNY2 = dict_yes_no[rad_CHCKDNY2]
 rad_DIABETE4 = col1.radio(
     "Have you ever been told by a doctor that you have diabetes?",
     ["Yes", "No", "Pre-diabetes or borderline diabetes only"],
+    index=1,
 )
 
 if (
@@ -185,8 +226,7 @@ if (
     or (rad_DIABETE4 == "Pre-diabetes or borderline diabetes only")
 ) and (rad_SEX == "Female"):
     rad_DIABETE4_GESTATIONAL = col1.radio(
-        "Was this only when you were pregnant?",
-        ["Yes", "No"],
+        "Was this only when you were pregnant?", ["Yes", "No"], index=1
     )
 else:
     rad_DIABETE4_GESTATIONAL = "No"
@@ -213,6 +253,7 @@ EDUCA = 1 + options_EDUCA.index(
     col1.radio(
         "What is the highest grade or year of school you completed?",
         options_EDUCA,
+        index=5,
     ),
     0,
 )
@@ -221,11 +262,12 @@ EDUCA = 1 + options_EDUCA.index(
 rad_VETERAN3 = col1.radio(
     "Have you ever served on active duty in the U.S. Armed Forces, military Reserves, or National Guard?",
     ["Yes", "No"],
+    index=1,
 )
 VETERAN3 = dict_yes_no[rad_VETERAN3]
 
 # Create a slider for Number of Children
-CHILDREN = col1.slider("How many children live in your household?", 0, 87, 0)
+CHILDREN = col1.slider("How many children live in your household?", 0, 40, 0)
 
 # Create a radio button for Income
 options_INCOME3 = [
@@ -242,7 +284,9 @@ options_INCOME3 = [
     "200,000 or more",
 ]
 INCOME3 = 1 + options_INCOME3.index(
-    col1.radio("Is your annual household income from all sources:", options_INCOME3),
+    col1.radio(
+        "Is your annual household income from all sources:", options_INCOME3, index=5
+    ),
     0,
 )
 
@@ -250,6 +294,7 @@ INCOME3 = 1 + options_INCOME3.index(
 rad_DECIDE = col1.radio(
     "Because of a physical, mental, or emotional condition, do you have serious difficulty concentrating, remembering, or making decisions?",
     ["Yes", "No"],
+    index=1,
 )
 DECIDE = dict_yes_no[rad_DECIDE]
 
@@ -257,6 +302,7 @@ DECIDE = dict_yes_no[rad_DECIDE]
 rad_DIFFALON = col1.radio(
     "Because of a physical, mental, or emotional condition, do you have difficulty doing errands alone such as visiting a doctor's office or shopping?",
     ["Yes", "No"],
+    index=1,
 )
 DIFFALON = dict_yes_no[rad_DIFFALON]
 
@@ -264,6 +310,7 @@ DIFFALON = dict_yes_no[rad_DIFFALON]
 rad_COVIDPOS = col1.radio(
     "Has a doctor, nurse, or other health professional ever told you that you tested positive for COVID 19?",
     ["Yes", "No", "Tested positive using home test without health professional"],
+    index=1,
 )
 if (rad_COVIDPOS == "Yes") or (
     rad_COVIDPOS == "Tested positive using home test without health professional"
@@ -276,6 +323,7 @@ else:
 rad_PREDIAB2 = col1.radio(
     "Have you ever been told by a doctor that you have pre-diabetes or borderline diabetes?",
     ["Yes", "Yes, during pregnancy", "No"],
+    index=2,
 )
 if (rad_COVIDPOS == "Yes") or (rad_COVIDPOS == "Yes, during pregnancy"):
     PREDIAB2 = 1
@@ -298,6 +346,7 @@ else:
 rad_LSATISFY = col2.radio(
     "In general, how satisfied are you with your life?",
     ["Very satisfied", "Satisfied", "Dissatisfied", "Very dissatisfied"],
+    index=0,
 )
 if (rad_LSATISFY == "Very satisfied") or (rad_LSATISFY == "Satisfied"):
     LSATISFY = 1
@@ -310,22 +359,21 @@ EMTSUPRT = 1 + options_EMTSUPRT.index(
     col2.radio(
         "How often do you get the social and emotional support you need?",
         options_EMTSUPRT,
+        index=0,
     )
 )
 
 # Create a radio button for Social Isolation
 options_SDHISOLT = ["Always", "Usually", "Sometimes", "Rarely", "Never"]
 SDHISOLT = 1 + options_SDHISOLT.index(
-    col2.radio(
-        "How often do you feel isolated from others?",
-        options_SDHISOLT,
-    )
+    col2.radio("How often do you feel isolated from others?", options_SDHISOLT, index=4)
 )
 
 # Create a radio button for Employment Status
 rad_SDHEMPLY = col2.radio(
     "In the past 12 months have you lost employment or had hours reduced?",
     ["Yes", "No"],
+    index=1,
 )
 SDHEMPLY = dict_yes_no[rad_SDHEMPLY]
 
@@ -333,6 +381,7 @@ SDHEMPLY = dict_yes_no[rad_SDHEMPLY]
 rad_FOODSTMP = col2.radio(
     "During the past 12 months, have you received food stamps, also called SNAP, the Supplemental Nutrition Assistance Program on an EBT card?",
     ["Yes", "No"],
+    index=1,
 )
 FOODSTMP = dict_yes_no[rad_FOODSTMP]
 
@@ -342,6 +391,7 @@ SDHFOOD1 = 1 + options_SDHFOOD1.index(
     col2.radio(
         "During the past 12 months how often did the food that you bought not last, and you didn't have money to get more?",
         options_SDHFOOD1,
+        index=4,
     )
 )
 
@@ -349,6 +399,7 @@ SDHFOOD1 = 1 + options_SDHFOOD1.index(
 rad_SDHBILLS = col2.radio(
     "During the last 12 months, was there a time when you were not able to pay your mortgage, rent or utility bills?",
     ["Yes", "No"],
+    index=1,
 )
 SDHBILLS = dict_yes_no[rad_SDHBILLS]
 
@@ -356,6 +407,7 @@ SDHBILLS = dict_yes_no[rad_SDHBILLS]
 rad_SDHUTILS = col2.radio(
     "During the last 12 months was there a time when an electric, gas, oil, or water company threatened to shut off services?",
     ["Yes", "No"],
+    index=1,
 )
 SDHUTILS = dict_yes_no[rad_SDHUTILS]
 
@@ -363,6 +415,7 @@ SDHUTILS = dict_yes_no[rad_SDHUTILS]
 rad_SDHTRNSP = col2.radio(
     "During the past 12 months has a lack of reliable transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living?",
     ["Yes", "No"],
+    index=1,
 )
 SDHTRNSP = dict_yes_no[rad_SDHTRNSP]
 
@@ -372,13 +425,13 @@ SDHSTRE1 = 1 + options_SDHSTRE1.index(
     col2.radio(
         "Stress means a situation in which a person feels tense, restless, nervous, or anxious, or is unable to sleep at night because his/her mind is troubled all the time. Within the last 30 days, how often have you felt this kind of stress?",
         options_SDHSTRE1,
+        index=4,
     )
 )
 
 # Create a radio button for Language
 rad_QSTLANG = col2.radio(
-    "What language do you mainly speak at home?",
-    ["English", "Spanish"],
+    "What language do you mainly speak at home?", ["English", "Spanish"], index=0
 )
 if rad_QSTLANG == "English":
     QSTLANG = 1
@@ -387,22 +440,19 @@ else:
 
 # Create a radio button for Metropolitan Status
 rad_METSTAT = col2.radio(
-    "Do you live in a Metropolitan county?",
-    ["Yes", "No"],
+    "Do you live in a Metropolitan county?", ["Yes", "No"], index=0
 )
 _METSTAT = dict_yes_no[rad_METSTAT]
 
 # Create a radio button for Urban Status
-rad_URBSTAT = col2.radio(
-    "Do you live in an Urban county?",
-    ["Yes", "No"],
-)
+rad_URBSTAT = col2.radio("Do you live in an Urban county?", ["Yes", "No"], index=0)
 _URBSTAT = dict_yes_no[rad_URBSTAT]
 
 # Create a radio button for Health Plan
 rad_HLTHPLN = col2.radio(
     "Do you have any kind of health care coverage, including health insurance, prepaid plans such as HMOs, or government plans such as Medicare?",
     ["Yes", "No"],
+    index=0,
 )
 _HLTHPLN = dict_yes_no[rad_HLTHPLN]
 
@@ -410,6 +460,7 @@ _HLTHPLN = dict_yes_no[rad_HLTHPLN]
 rad_TOTINDA = col2.radio(
     "During the past month, other than your regular job, did you participate in any physical activities or exercises such as running, calisthenics, golf, gardening, or walking for exercise?",
     ["Yes", "No"],
+    index=0,
 )
 _TOTINDA = dict_yes_no[rad_TOTINDA]
 
@@ -417,10 +468,11 @@ _TOTINDA = dict_yes_no[rad_TOTINDA]
 rad_DRDXAR2 = col2.radio(
     "Have you ever been told by a doctor or other health professional that you have some form of arthritis, rheumatoid arthritis, gout, lupus, or fibromyalgia?",
     ["Yes", "No"],
+    index=1,
 )
 _DRDXAR2 = dict_yes_no[rad_DRDXAR2]
 
-# Create a radio button for Binge Drinking
+# Calculate feature for Binge Drinking
 if rad_SEX == "Male":
     question_text = (
         "In the past 30 days, have you had five or more drinks on one occasion?"
@@ -447,13 +499,14 @@ if ALCDAY4 > 0:
     # Create a radio button for Drinking Frequency
     AVEDRNK3 = col2.slider(
         "On the days when you drank, about how many drinks did you drink on average?",
-        0,
+        1,
         99,
-        0,
+        1,
     )
 else:
     AVEDRNK3 = 0
 
+# Calculate total number of alcoholic beverages consumed per week
 _DRNKWK2 = round(ALCDAY4 * AVEDRNK3 * 100, ndigits=0)
 
 # Calculate the Heavy Drinking Category
@@ -485,8 +538,7 @@ else:
 
 # Create a radio button for Home Ownership
 rad_RENTHOM1 = col2.radio(
-    "Do you own or rent your home?",
-    ["Own", "Rent", "Other"],
+    "Do you own or rent your home?", ["Own", "Rent", "Other"], index=0
 )
 
 if rad_RENTHOM1 == "Own":
@@ -552,6 +604,7 @@ rad_SMOKGRP = col2.radio(
         "Other smoker",
         "Never smoked",
     ],
+    index=3,
 )
 _SMOKGRP_1 = 0
 _SMOKGRP_3 = 0
