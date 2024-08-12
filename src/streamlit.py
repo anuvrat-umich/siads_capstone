@@ -38,7 +38,7 @@ dict_health = {
 st.title("Risk of Heart Attack / Myocardial Infarction Prediction")
 # Set the app description with a welcome message
 st.markdown(
-    "Hello! This app predicts the risk of heart attack based on a few user inputs."
+    "Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins."
 )
 # st.write("Thanks for using our model!")
 
