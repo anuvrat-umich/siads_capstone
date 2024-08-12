@@ -3,7 +3,7 @@ import joblib
 
 
 def predict(data):
-    clf = joblib.load("..\models\lr_model.pkl")
+    clf = joblib.load(".\models\lr_model.pkl")
     predicted_proba = clf.predict_proba(data)
     threshold = 0.8
 
