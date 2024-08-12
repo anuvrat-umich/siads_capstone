@@ -1,17 +1,24 @@
 import streamlit as st
 import joblib
+from sklearn.preprocessing import StandardScaler
 
 
 def predict(data):
     clf = joblib.load("./models/lr_model.pkl")
-    predicted_proba = clf.predict_proba(data)
     threshold = 0.8
 
-    if predicted_proba[0][1] > threshold:
-        return f"High ({predicted_proba[0][1]:.0%})"
+    # Define scaler to scale the data
+    # scaler = StandardScaler()
+    # data_scaled = scaler.fit_transform(data)
+
+    # Make prediction
+    predicted_proba = clf.predict_proba(data)[0][1]
+
+    if predicted_proba > threshold:
+        return f"High {clf.classes_} {clf.predict(data)} ({predicted_proba:.0%})"
     else:
         # return probability as percentage
-        return "Low ({predicted_proba[0][1]:.0%})"
+        return f"Low ({predicted_proba:.0%})"
 
 
 def predict_dummy(data):
