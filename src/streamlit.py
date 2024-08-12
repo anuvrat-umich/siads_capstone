@@ -278,7 +278,6 @@ else:
 
 # Display the user inputs
 st.write("Diabetes is:", DIABETE4)
-st.write("Selected EDUCA is:", EDUCA)
 
 # Data
 st.write("Your BMI is:", _BMI5)
