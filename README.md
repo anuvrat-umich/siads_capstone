@@ -14,10 +14,31 @@ Modified on : 2024 August, 13
   - Streamlit app
 - Folder structure
 
+- [Introduction](#introduction)
+- [Application](#application)
+- [Technical details](#technical-details)
+- [Tech stack](#tech-stack)
+- [Folder structure](#folder-structure)
+- [Data](#data)
+- [Methods](#methods)
+- [Discussion](#discussion)
+- [Contributors](#contributors)
 
 # Introduction
 
-In this Capstone project, we experimented with different machine learning models to best predict the likelihood of a person being at risk for a based on risk factors such as history of angina or coronary heart disease, smoking, high blood pressure, high cholesterol, unhealthy diet, lack of exercise, obesity, use of alcohol, other comorbidities.
+Risk Pulse is an application to predict risk of Heart Attack / Myocardial Infarction based on few user inputs including demographic information and history of angina or coronary heart disease, smoking, high blood pressure, high cholesterol, unhealthy diet, lack of exercise, obesity, use of alcohol, and other comorbidities. It takes user ~5 minutes to provide the inputs. The prediction takes place within a second. The prediction is done using an experimental, educational Machine Learning model built using public data and should not be considered medical advice. Please consult your doctor or a health care professional to talk about your situation.
+
+## Application
+
+The application can be accessed at [Risk Pulse](#https://myocardial-infarction.streamlit.app/). The application works equally well on traditional computing devices (laptop/desktop) and mobile devices (ipad/iphone/android). It may take couple of seconds to open the first time you click the link. The user is asked total 50 questions (42 radio button, 8 sliders). However, the application is pre-filled for an "average" respondent using historical median values for each specific questions the user is asked to help the user.
+
+## Technical details
+
+The following sections will deal with the technical set up including tech stack, data, folder structure, Machine Learning methods used, result and discussion.
+
+## Tech stack
+
+We have used Python based tech stack. Raw databases were obtained in SAS format that were readily converted to Pandas DataFrame as pickled to optimize space as SAS file used a highly sparse .XPT format. The data is processed using pandas and imblearn packages. The models are developed in Python using scikit-learn, xgboost and lightgbm packages. Matplolitb, seaborn and shap packages were used for visualization and explanation of results. Joblib is used to save and load models. Streamlit is used for final deployment.
 
 ## Data
 
@@ -38,7 +59,7 @@ pip install -r requirements.txt
 
 ## Application Use
 
-The first step is to clean up the data and run feature engineering steps. The next step is train and evaluate different machine learning models. 
+The first step is to clean up the data and run feature engineering steps. The next step is train and evaluate different machine learning models.
 
 ### Data cleanup and feature engineering
 
@@ -78,4 +99,3 @@ https://myocardial-infarction.streamlit.app/
         ├── LICENSE                                 # GNU General Public License v3.0
         ├── README.md                               # This file with overview of the repository
         └── requirements.txt                        # Project dependencies
-
