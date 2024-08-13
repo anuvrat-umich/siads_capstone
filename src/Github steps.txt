@@ -12,6 +12,6 @@ git push -u origin <branchName>
 
 #Merge a branch to main
 git checkout main
-git pull origin master
+git pull origin main
 git merge test
-git push origin master
+git push origin main
