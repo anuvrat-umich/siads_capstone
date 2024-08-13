@@ -4,6 +4,7 @@ Author: Anuvrat Chaturvedi
 Date: 12th August 2024
 Purpose: This file contains a Streamlit application for predicting the risk of heart attack or myocardial infarction based on user inputs.
 
+Following docstring is generated using Generative AI (Github Copilot)
 Functions:
 - predict(data): Predicts the risk of heart attack based on the given data.
 - get_base64_image(image_file): Converts an image file to base64 format.
@@ -108,18 +109,30 @@ st.markdown(
 )
 
 # Set the app title
-st.title("Risk of Heart Attack / Myocardial Infarction Prediction")
+st.title(
+    ":red[Risk Pulse]",
+    anchor=False,
+)
 # Set the app description with a welcome message
 st.markdown(
-    "Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins."
+    f"<h3 style='font-family:Arial; font-weight:bold; font-size: 24px;'>Risk of Heart Attack / Myocardial Infarction Prediction</h3>",
+    unsafe_allow_html=True,
 )
 st.markdown(
-    "Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
-    Please consult your doctor or a health care professional to talk about your situation."
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins.</h3>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
+    Please consult your doctor or a health care professional to talk about your situation.</h3>",
+    unsafe_allow_html=True,
 )
 
 # Getting user inputs
-st.header("Inputs for Prediction")
+st.markdown(
+    f"<h3 style='font-family:Arial; font-weight:bold; font-size: 24px;'>Inputs for Prediction</h3>",
+    unsafe_allow_html=True,
+)
 
 # Create two columns for user inputs
 col1, col2 = st.columns(2)
@@ -802,8 +815,9 @@ st.markdown(
 # Create the prediction button
 if st.button(
     "Predict risk of heart attack",
+    type="primary",
     key="predict_button",
-    help="Button to trigger the prediction",
+    help="Click to trigger prediction",
 ):
     # Assuming `predict` is your function and `lst_inputs` is your input list
     prediction = predict([lst_inputs])
