@@ -1,3 +1,46 @@
+"""
+load_data.ipynb
+Author: Anuvrat Chaturvedi
+Date: 12th August 2024
+Purpose: This file contains a Streamlit application for predicting the risk of heart attack or myocardial infarction based on user inputs.
+
+Functions:
+- predict(data): Predicts the risk of heart attack based on the given data.
+- get_base64_image(image_file): Converts an image file to base64 format.
+Global Variables:
+- dict_yes_no: A dictionary mapping "Yes" and "No" to 1 and 0, respectively.
+- dict_yes_no_alt: A dictionary mapping "Yes" and "No" to 1 and 2, respectively.
+- dict_health: A dictionary mapping health descriptions to corresponding values.
+- background_image: A base64 encoded string representing the background image of the application.
+User Inputs:
+- Sex: The birth sex of the user.
+- Height: The height of the user in centimeters.
+- Weight: The weight of the user in kilograms.
+- Age: The age of the user.
+- General Health: The general health status of the user.
+- Physical Health: The number of days during the past 30 days when the user's physical health was not good.
+- Mental Health: The number of days during the past 30 days when the user's mental health was not good.
+- Personal Doctor: Whether the user has a personal doctor or health care provider.
+- Medical Cost: Whether the user could not see a doctor in the past 12 months due to affordability.
+- Checkup: The time since the user last visited a doctor for a routine checkup.
+- Sleep Time: The average number of hours of sleep the user gets in a 24-hour period.
+- Angina or Coronary Heart Disease: Whether the user has been told by a doctor that they have angina or coronary heart disease.
+- Stroke: Whether the user has been told they had a stroke.
+- Cholesterol: Whether the user has been told they had melanoma or any other types of cancer.
+- COPD: Whether the user has been told they had C.O.P.D., emphysema, or chronic bronchitis.
+- Depression: Whether the user has been told they had a depressive disorder.
+- Kidney Disease: Whether the user has been told they had kidney disease.
+- Diabetes: Whether the user has been told by a doctor that they have diabetes.
+- Education: The highest grade or year of school completed by the user.
+- Veteran Status: Whether the user has served on active duty in the U.S. Armed Forces, military Reserves, or National Guard.
+- Number of Children: The number of children living in the user's household.
+- Income: The annual household income from all sources.
+- Decision Making: Whether the user has serious difficulty concentrating, remembering, or making decisions due to a physical, mental, or emotional condition.
+- Difficulty doing Errands Alone: Whether the user has difficulty doing errands alone due to a physical, mental, or emotional condition.
+- COVID-19 Positive: Whether the user has tested positive for COVID-19.
+- Pre-Diabetes: Whether the user has been told by a doctor that they have pre-diabetes or borderline diabetes.
+"""
+
 import streamlit as st
 import joblib
 from sklearn.preprocessing import StandardScaler
