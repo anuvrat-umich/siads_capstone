@@ -738,18 +738,35 @@ lst_inputs = [
     MARITAL_5,
 ]
 
+# Custom CSS for the button
+st.markdown(
+    """
+    <style>
+    .stButton>button {
+        background-color: red;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        font-family: Arial;
+        border-radius: 10px;
+        padding: 10px 20px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Create the prediction button
 if st.button(
     "Predict risk of heart attack",
     key="predict_button",
     help="Button to trigger the prediction",
-    button_color="red",
-    font=("Arial", "bold"),
 ):
+    # Assuming `predict` is your function and `lst_inputs` is your input list
     prediction = predict([lst_inputs])
 
-    # Display the prediction
-    st.write(
-        "The predicted risk of heart attack is:", prediction, font=("Arial", "bold")
+    # Display the prediction with custom styling
+    st.markdown(
+        f"<h3 style='font-family:Arial; font-weight:bold; font-size: 20px;'>The predicted risk of heart attack is: {prediction}</h3>",
+        unsafe_allow_html=True,
     )
