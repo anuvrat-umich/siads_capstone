@@ -70,6 +70,10 @@ st.title("Risk of Heart Attack / Myocardial Infarction Prediction")
 st.markdown(
     "Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins."
 )
+st.markdown(
+    "Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
+    Please consult your doctor or a health care professional to talk about your situation."
+)
 
 # Getting user inputs
 st.header("Inputs for Prediction")
@@ -736,8 +740,16 @@ lst_inputs = [
 
 
 # Create the prediction button
-if st.button("Predict risk of heart attack"):
+if st.button(
+    "Predict risk of heart attack",
+    key="predict_button",
+    help="Button to trigger the prediction",
+    button_color="red",
+    font=("Arial", "bold"),
+):
     prediction = predict([lst_inputs])
 
     # Display the prediction
-    st.write("The predicted risk of heart attack is:", prediction)
+    st.write(
+        "The predicted risk of heart attack is:", prediction, font=("Arial", "bold")
+    )
