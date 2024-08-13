@@ -22,28 +22,28 @@ Modified on : 2024 August, 13
 
 ### Folder Structure
 
-root
-├── ...
-├── .streamlit # Configuration file fro Streamlit application
-├── appdata # Media files for Streamlit application
-├── data # Data files to train the model
-│ ├── BRFSS2022_modeling_data.zip # ZIP file containing the final modeling data
-│ ├── BRFSS2022_raw.pkl # Raw pickled data
-├── doc # Documentation files to understand the data better
-│ ├── 2022-BRFSS-Questionnaire-508.pdf # 2022 BRFSS Questionnaire
-│ ├── USCODE22_LLCP_102523.html # Codebook
-├── models # Trained models
-│ ├── lgbm_model.pkl # Trained LGBM model
-│ ├── lr_model.pkl # Trained Logistic Regression model
-│ ├── rf_model.zip # Trained Random Forest model (Unzipped>100MB)
-│ ├── xgb_model.pkl # Trained XGBoost model
-├── src # Source code
-│ ├── load_data.ipynb # Load input files for further processing
-│ ├── model.ipynb # Experiment with various modelling techniques including LR, RF, XGB, LGBM, DT
-│ ├── streamlit.py # Python code to create the Streamlit application
-├── LICENSE # GNU General Public License v3.0
-├── README.md # This file with overview of the repository
-└── requirements.txt # Project dependencies
+        root
+        ├── ...
+        ├── .streamlit                              # Configuration file fro Streamlit application
+        ├── appdata                                 # Media files for Streamlit application
+        ├── data                                    # Data files to train the model
+        │ ├── BRFSS2022_modeling_data.zip           # ZIP file containing the final modeling data
+        │ ├── BRFSS2022_raw.pkl                     # Raw pickled data
+        ├── doc                                     # Documentation files to understand the data better
+        │ ├── 2022-BRFSS-Questionnaire-508.pdf      # 2022 BRFSS Questionnaire
+        │ ├── USCODE22_LLCP_102523.html             # Codebook
+        ├── models                                  # Trained models
+        │ ├── lgbm_model.pkl                        # Trained LGBM model
+        │ ├── lr_model.pkl                          # Trained Logistic Regression model
+        │ ├── rf_model.zip                          # Trained Random Forest model (Unzipped>100MB)
+        │ ├── xgb_model.pkl                         # Trained XGBoost model
+        ├── src                                     # Source code
+        │ ├── load_data.ipynb                       # Load input files for further processing
+        │ ├── model.ipynb                           # Experiment with various modelling techniques including LR, RF, XGB, LGBM, DT
+        │ ├── streamlit.py                          # Python code to create the Streamlit application
+        ├── LICENSE                                 # GNU General Public License v3.0
+        ├── README.md                               # This file with overview of the repository
+        └── requirements.txt                        # Project dependencies
 
 ### Data cleanup
 
