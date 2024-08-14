@@ -105,4 +105,4 @@ Future enhancements to this tool can include addition of interpretability or exp
 
 ## Contributors
 
-The project has been initiated by [Deepak Prabhu](https://github.com/Better-tomorrow), [Noah Chasse](https://github.com/nchasse) and [Anuvrat Chaturvedi](https://github.com/anuvrat-umich) under the guidance of [Michelle LeBlanc] (https://github.com/michelledleblanc).
+The project has been initiated by [Deepak Prabhu](https://github.com/Better-tomorrow), [Noah Chasse](https://github.com/nchasse) and [Anuvrat Chaturvedi](https://github.com/anuvrat-umich) under the guidance of [Michelle LeBlanc](https://github.com/michelledleblanc).
