@@ -4,6 +4,7 @@ Author: Anuvrat Chaturvedi
 Date: 12th August 2024
 Purpose: This file contains a Streamlit application for predicting the risk of heart attack or myocardial infarction based on user inputs.
 
+Following docstring is generated using Generative AI (Github Copilot)
 Functions:
 - predict(data): Predicts the risk of heart attack based on the given data.
 - get_base64_image(image_file): Converts an image file to base64 format.
@@ -44,15 +45,18 @@ User Inputs:
 import streamlit as st
 import joblib
 from sklearn.preprocessing import StandardScaler
+import pandas as pd
 
 
 def predict(data):
     clf = joblib.load("./models/lr_model.pkl")
-    threshold = 0.8
+    threshold = 0.6
 
     # Define scaler to scale the data
     # scaler = StandardScaler()
     # data_scaled = scaler.fit_transform(data)
+
+    pd.to_pickle(data, "./data/delete_data_from_app.pkl")
 
     # Make prediction
     predicted_proba = clf.predict_proba(data)[0][1]
@@ -108,18 +112,30 @@ st.markdown(
 )
 
 # Set the app title
-st.title("Risk of Heart Attack / Myocardial Infarction Prediction")
+st.title(
+    ":red[Risk Pulse]",
+    anchor=False,
+)
 # Set the app description with a welcome message
 st.markdown(
-    "Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins."
+    f"<h3 style='font-family:Arial; font-weight:bold; font-size: 24px;'>Risk of Heart Attack / Myocardial Infarction Prediction</h3>",
+    unsafe_allow_html=True,
 )
 st.markdown(
-    "Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
-    Please consult your doctor or a health care professional to talk about your situation."
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins.</h3>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
+    Please consult your doctor or a health care professional to talk about your situation.</h3>",
+    unsafe_allow_html=True,
 )
 
 # Getting user inputs
-st.header("Inputs for Prediction")
+st.markdown(
+    f"<h3 style='font-family:Arial; font-weight:bold; font-size: 24px;'>Inputs for Prediction</h3>",
+    unsafe_allow_html=True,
+)
 
 # Create two columns for user inputs
 col1, col2 = st.columns(2)
@@ -710,76 +726,76 @@ elif rad_MARITAL == "Never married":
 
 
 # List of user inputs in the order of the model for prediction
-lst_inputs = [
-    GENHLTH,
-    PHYSHLTH,
-    MENTHLTH,
-    PERSDOC3,
-    MEDCOST1,
-    CHECKUP1,
-    SLEPTIM1,
-    CVDCRHD4,
-    CVDSTRK3,
-    CHCOCNC1,
-    CHCCOPD3,
-    ADDEPEV3,
-    CHCKDNY2,
-    DIABETE4,
-    EDUCA,
-    VETERAN3,
-    CHILDREN,
-    INCOME3,
-    DECIDE,
-    DIFFALON,
-    COVIDPOS,
-    PREDIAB2,
-    CNCRDIFF,
-    LSATISFY,
-    EMTSUPRT,
-    SDHISOLT,
-    SDHEMPLY,
-    FOODSTMP,
-    SDHFOOD1,
-    SDHBILLS,
-    SDHUTILS,
-    SDHTRNSP,
-    SDHSTRE1,
-    QSTLANG,
-    _METSTAT,
-    _URBSTAT,
-    _HLTHPLN,
-    _TOTINDA,
-    _DRDXAR2,
-    _SEX,
-    _AGE80,
-    HTM4,
-    WTKG3,
-    _BMI5,
-    _RFBING6,
-    _DRNKWK2,
-    _RFDRHV8,
-    _ASTHMS1_2,
-    _ASTHMS1_3,
-    RENTHOM1_1,
-    RENTHOM1_3,
-    _BMI5CAT_1,
-    _BMI5CAT_2,
-    _BMI5CAT_3,
-    _RACEPR1_2,
-    _RACEPR1_3,
-    _RACEPR1_4,
-    _RACEPR1_5,
-    _RACEPR1_6,
-    _RACEPR1_7,
-    _SMOKGRP_1,
-    _SMOKGRP_3,
-    EMPLOY1_3,
-    EMPLOY1_5,
-    EMPLOY1_7,
-    EMPLOY1_8,
-    MARITAL_2,
-    MARITAL_5,
-]
+dict_inputs = {
+    "GENHLTH": GENHLTH,
+    "PHYSHLTH": PHYSHLTH,
+    "MENTHLTH": MENTHLTH,
+    "PERSDOC3": PERSDOC3,
+    "MEDCOST1": MEDCOST1,
+    "CHECKUP1": CHECKUP1,
+    "SLEPTIM1": SLEPTIM1,
+    "CVDCRHD4": CVDCRHD4,
+    "CVDSTRK3": CVDSTRK3,
+    "CHCOCNC1": CHCOCNC1,
+    "CHCCOPD3": CHCCOPD3,
+    "ADDEPEV3": ADDEPEV3,
+    "CHCKDNY2": CHCKDNY2,
+    "DIABETE4": DIABETE4,
+    "EDUCA": EDUCA,
+    "VETERAN3": VETERAN3,
+    "CHILDREN": CHILDREN,
+    "INCOME3": INCOME3,
+    "DECIDE": DECIDE,
+    "DIFFALON": DIFFALON,
+    "COVIDPOS": COVIDPOS,
+    "PREDIAB2": PREDIAB2,
+    "CNCRDIFF": CNCRDIFF,
+    "LSATISFY": LSATISFY,
+    "EMTSUPRT": EMTSUPRT,
+    "SDHISOLT": SDHISOLT,
+    "SDHEMPLY": SDHEMPLY,
+    "FOODSTMP": FOODSTMP,
+    "SDHFOOD1": SDHFOOD1,
+    "SDHBILLS": SDHBILLS,
+    "SDHUTILS": SDHUTILS,
+    "SDHTRNSP": SDHTRNSP,
+    "SDHSTRE1": SDHSTRE1,
+    "QSTLANG": QSTLANG,
+    "_METSTAT": _METSTAT,
+    "_URBSTAT": _URBSTAT,
+    "_HLTHPLN": _HLTHPLN,
+    "_TOTINDA": _TOTINDA,
+    "_DRDXAR2": _DRDXAR2,
+    "_SEX": _SEX,
+    "_AGE80": _AGE80,
+    "HTM4": HTM4,
+    "WTKG3": WTKG3,
+    "_BMI5": _BMI5,
+    "_RFBING6": _RFBING6,
+    "_DRNKWK2": _DRNKWK2,
+    "_RFDRHV8": _RFDRHV8,
+    "_ASTHMS1_2.0": _ASTHMS1_2,
+    "_ASTHMS1_3.0": _ASTHMS1_3,
+    "RENTHOM1_1.0": RENTHOM1_1,
+    "RENTHOM1_3.0": RENTHOM1_3,
+    "_BMI5CAT_1.0": _BMI5CAT_1,
+    "_BMI5CAT_2.0": _BMI5CAT_2,
+    "_BMI5CAT_3.0": _BMI5CAT_3,
+    "_RACEPR1_2.0": _RACEPR1_2,
+    "_RACEPR1_3.0": _RACEPR1_3,
+    "_RACEPR1_4.0": _RACEPR1_4,
+    "_RACEPR1_5.0": _RACEPR1_5,
+    "_RACEPR1_6.0": _RACEPR1_6,
+    "_RACEPR1_7.0": _RACEPR1_7,
+    "_SMOKGRP_1.0": _SMOKGRP_1,
+    "_SMOKGRP_3.0": _SMOKGRP_3,
+    "EMPLOY1_3.0": EMPLOY1_3,
+    "EMPLOY1_5.0": EMPLOY1_5,
+    "EMPLOY1_7.0": EMPLOY1_7,
+    "EMPLOY1_8.0": EMPLOY1_8,
+    "MARITAL_2.0": MARITAL_2,
+    "MARITAL_5.0": MARITAL_5,
+}
 
 # Custom CSS for the button
 st.markdown(
@@ -802,14 +818,21 @@ st.markdown(
 # Create the prediction button
 if st.button(
     "Predict risk of heart attack",
+    type="primary",
     key="predict_button",
-    help="Button to trigger the prediction",
+    help="Click to trigger prediction",
 ):
     # Assuming `predict` is your function and `lst_inputs` is your input list
-    prediction = predict([lst_inputs])
+    input_data = pd.DataFrame(dict_inputs, index=[0])
+    prediction = predict(input_data)
 
     # Display the prediction with custom styling
     st.markdown(
         f"<h3 style='font-family:Arial; font-weight:bold; font-size: 20px;'>The predicted risk of heart attack is: {prediction}</h3>",
         unsafe_allow_html=True,
     )
+
+st.markdown(
+    f"<h5 style='font-family:Arial; font-weight:bold; font-size: 10px;'>Data Source: Centers for Disease Control and Prevention (CDC). Behavioral Risk Factor Surveillance System Survey Data. Atlanta, Georgia: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention, 2022</h5>",
+    unsafe_allow_html=True,
+)
