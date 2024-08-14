@@ -1,81 +1,38 @@
-# siads_capstone - Team DNA (August 2024)
+# Risk Pulse - Developed by Team DNA (August 2024)
 
 Capstone repo for SIADS Summer 2024 Team DNA (Deepak, Noah, Anuvrat)
-Modified on : 2024 August, 13
+Page modified on : 2024 August, 13
 
 ## Table of Contents
-
-- Introduction
-- Data
-- Installation
-- Application use
-  - Data cleanup and feature engineering
-  - Models
-  - Streamlit app
-- Folder structure
 
 - [Introduction](#introduction)
 - [Application](#application)
 - [Technical details](#technical-details)
 - [Tech stack](#tech-stack)
 - [Folder structure](#folder-structure)
+- [Installation](#installation)
 - [Data](#data)
 - [Methods](#methods)
 - [Discussion](#discussion)
 - [Contributors](#contributors)
 
-# Introduction
+## Introduction
 
-Risk Pulse is an application to predict risk of Heart Attack / Myocardial Infarction based on few user inputs including demographic information and history of angina or coronary heart disease, smoking, high blood pressure, high cholesterol, unhealthy diet, lack of exercise, obesity, use of alcohol, and other comorbidities. It takes user ~5 minutes to provide the inputs. The prediction takes place within a second. The prediction is done using an experimental, educational Machine Learning model built using public data and should not be considered medical advice. Please consult your doctor or a health care professional to talk about your situation.
+Risk Pulse is an application to predict risk of Heart Attack / Myocardial Infarction based on few user inputs including demographic information such as age, gender, height, weight, history of angina or coronary heart disease, lack of exercise, obesity, smoking, use of alcohol, health status, and other comorbidities. It takes user ~5 minutes to provide the inputs. The prediction takes place within a second. The prediction is done using an experimental, educational Machine Learning model built using public data and should not be considered medical advice. Please consult your doctor or a health care professional to talk about your situation.
 
 ## Application
 
-The application can be accessed at [Risk Pulse](#https://myocardial-infarction.streamlit.app/). The application works equally well on traditional computing devices (laptop/desktop) and mobile devices (ipad/iphone/android). It may take couple of seconds to open the first time you click the link. The user is asked total 50 questions (42 radio button, 8 sliders). However, the application is pre-filled for an "average" respondent using historical median values for each specific questions the user is asked to help the user.
+The application can be accessed at [Risk Pulse](https://myocardial-infarction.streamlit.app/). The application works equally well on traditional computing devices (laptop/desktop) and mobile devices (ipad/iphone/android). It may take a couple of seconds to open the first time you click the link. The user is asked a total of 50 questions (42 radio buttons, 8 sliders). However, the application is pre-filled for an "average" respondent using historical median values for each specific question to help the user easily fill the form.
 
 ## Technical details
 
-The following sections will deal with the technical set up including tech stack, data, folder structure, Machine Learning methods used, result and discussion.
+The following sections will deal with the technical set up including tech stack, folder structure, data, Machine Learning methods used, result and discussion.
 
 ## Tech stack
 
 We have used Python based tech stack. Raw databases were obtained in SAS format that were readily converted to Pandas DataFrame as pickled to optimize space as SAS file used a highly sparse .XPT format. The data is processed using pandas and imblearn packages. The models are developed in Python using scikit-learn, xgboost and lightgbm packages. Matplolitb, seaborn and shap packages were used for visualization and explanation of results. Joblib is used to save and load models. Streamlit is used for final deployment.
 
-## Data
-
-We have chosen the Behavioral Risk Factor Surveillance System (BRFSS) data set which is a telephonic survey of US residents conducted by the CDC every year about their health-related risk behaviors, chronic health conditions, and use of preventive services. We are using the BRFSS data to build a model to predict whether an individual has a high risk of having a heart attack.
-
-The data can be downloaded from CDC website -> https://www.cdc.gov/brfss/annual_data/annual_2022.html
-
-We have used 2022 BRFSS Data (SAS Transport Format) for this project.
-A copy of raw data has been included in the repository ../data/BRFSS2022_raw.pkl
-
-## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the required packages.
-
-```bash
-pip install -r requirements.txt
-```
-
-## Application Use
-
-The first step is to clean up the data and run feature engineering steps. The next step is train and evaluate different machine learning models.
-
-### Data cleanup and feature engineering
-
-This notebook reads the BRFSS2022 raw data (found in data folder in pkl foramt ) and applies the data cleanup (drop the unwanted columns) and feature engineering (encoding survey data as binary or one hot encoding). The final output is saved as ../data/BRFSS2022_modeling_data.pkl
-
-### Models
-
-This notebook has all the steps for training and evaluation of various classification models.
-
-### streamlit app
-
-This file is just for reference and no need to run this. This is the code for the stremlit app which hosts the logistic regression model. User can input their health parameters and get the prediction on myocardial infraction. You can access the app here:
-
-https://myocardial-infarction.streamlit.app/
-
-### Folder Structure
+## Folder Structure
 
         root
         ├── ...
@@ -99,3 +56,29 @@ https://myocardial-infarction.streamlit.app/
         ├── LICENSE                                 # GNU General Public License v3.0
         ├── README.md                               # This file with overview of the repository
         └── requirements.txt                        # Project dependencies
+
+## Installation
+
+To replicate the steps in the repository, use the package manager [pip](https://pip.pypa.io/en/stable/) to install the required packages using requirements.txt file.
+
+```bash
+pip install -r requirements.txt
+```
+
+## Data
+
+We have chosen the Behavioral Risk Factor Surveillance System (BRFSS) data set which is a telephonic survey of US residents conducted by the CDC every year about their health-related risk behaviors, chronic health conditions, and use of preventive services. The data can be downloaded from [CDC website](https://www.cdc.gov/brfss/annual_data/annual_2022.html)
+
+We have used 2022 BRFSS Data (SAS Transport Format) for this project. As already stated, it is a highly uncompressed format. We have converted the raw data to a Pandas DataFrame and have included a pickled copy of the same in the repository under [../data/BRFSS2022_raw.pkl](https://github.com/anuvrat-umich/siads_capstone/blob/main/data/BRFSS2022_raw.pkl)
+
+<b>Data cleanup and feature engineering</b>: [../src/load_data.ipynb](https://github.com/anuvrat-umich/siads_capstone/blob/main/src/load_data.ipynb) notebook reads the [../data/BRFSS2022_raw.pkl](https://github.com/anuvrat-umich/siads_capstone/blob/main/data/BRFSS2022_raw.pkl) and applies relevant data cleanup (dropping unwanted columns) and feature engineering (encoding some survey columns as binary, custom binning or one hot encoding) steps. Some of the reasons to drop columns included low fill rate, a lot of non-informative responses, and multicollinearity. We also dropped some records that had an abundance of non-informative responses (missing, not sure, don't know, etc.). Specific imputation methods including zero imputation, mean imputation, and majority class imputation were used for specific features. The final output is saved as ../data/BRFSS2022_modeling_data.pkl
+
+### Models
+
+The first step is to clean up the data and run feature engineering steps. The next step is train and evaluate different machine learning models. This notebook has all the steps for training and evaluation of various classification models.
+
+### streamlit app
+
+This file is just for reference and no need to run this. This is the code for the stremlit app which hosts the logistic regression model. User can input their health parameters and get the prediction on myocardial infraction. You can access the app here:
+
+https://myocardial-infarction.streamlit.app/
