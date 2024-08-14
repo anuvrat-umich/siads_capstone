@@ -33,7 +33,7 @@ The following sections will deal with the technical set up including tech stack,
 
 ## Tech stack
 
-We have used Python based tech stack. Raw databases were obtained in SAS format that were readily converted to Pandas DataFrame as pickled to optimize space as SAS file used a highly sparse .XPT format. The data is processed using pandas and imblearn packages. The models are developed in Python using scikit-learn, xgboost and lightgbm packages. Matplolitb, seaborn and shap packages were used for visualization and explanation of results. Joblib is used to save and load models. Streamlit is used for final deployment.
+We have used Python based tech stack. Raw databases were obtained in SAS format that were readily converted to Pandas DataFrame as pickled to optimize space as SAS file used a highly sparse .XPT format. We have used Jupyter notebooks for data and model exploration and python notebook for Streamlit deployment. The data is processed using pandas and imblearn packages. The models are developed in Python using scikit-learn, xgboost and lightgbm packages. Matplolitb, seaborn and shap packages were used for visualization and explanation of results. Joblib is used to save and load models. Streamlit is used for final deployment.
 
 ## Folder Structure
 
