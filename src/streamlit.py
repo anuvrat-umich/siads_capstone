@@ -45,15 +45,18 @@ User Inputs:
 import streamlit as st
 import joblib
 from sklearn.preprocessing import StandardScaler
+import pandas as pd
 
 
 def predict(data):
     clf = joblib.load("./models/lr_model.pkl")
-    threshold = 0.8
+    threshold = 0.6
 
     # Define scaler to scale the data
     # scaler = StandardScaler()
     # data_scaled = scaler.fit_transform(data)
+
+    pd.to_pickle(data, "./data/delete_data_from_app.pkl")
 
     # Make prediction
     predicted_proba = clf.predict_proba(data)[0][1]
@@ -723,76 +726,76 @@ elif rad_MARITAL == "Never married":
 
 
 # List of user inputs in the order of the model for prediction
-lst_inputs = [
-    GENHLTH,
-    PHYSHLTH,
-    MENTHLTH,
-    PERSDOC3,
-    MEDCOST1,
-    CHECKUP1,
-    SLEPTIM1,
-    CVDCRHD4,
-    CVDSTRK3,
-    CHCOCNC1,
-    CHCCOPD3,
-    ADDEPEV3,
-    CHCKDNY2,
-    DIABETE4,
-    EDUCA,
-    VETERAN3,
-    CHILDREN,
-    INCOME3,
-    DECIDE,
-    DIFFALON,
-    COVIDPOS,
-    PREDIAB2,
-    CNCRDIFF,
-    LSATISFY,
-    EMTSUPRT,
-    SDHISOLT,
-    SDHEMPLY,
-    FOODSTMP,
-    SDHFOOD1,
-    SDHBILLS,
-    SDHUTILS,
-    SDHTRNSP,
-    SDHSTRE1,
-    QSTLANG,
-    _METSTAT,
-    _URBSTAT,
-    _HLTHPLN,
-    _TOTINDA,
-    _DRDXAR2,
-    _SEX,
-    _AGE80,
-    HTM4,
-    WTKG3,
-    _BMI5,
-    _RFBING6,
-    _DRNKWK2,
-    _RFDRHV8,
-    _ASTHMS1_2,
-    _ASTHMS1_3,
-    RENTHOM1_1,
-    RENTHOM1_3,
-    _BMI5CAT_1,
-    _BMI5CAT_2,
-    _BMI5CAT_3,
-    _RACEPR1_2,
-    _RACEPR1_3,
-    _RACEPR1_4,
-    _RACEPR1_5,
-    _RACEPR1_6,
-    _RACEPR1_7,
-    _SMOKGRP_1,
-    _SMOKGRP_3,
-    EMPLOY1_3,
-    EMPLOY1_5,
-    EMPLOY1_7,
-    EMPLOY1_8,
-    MARITAL_2,
-    MARITAL_5,
-]
+dict_inputs = {
+    "GENHLTH": GENHLTH,
+    "PHYSHLTH": PHYSHLTH,
+    "MENTHLTH": MENTHLTH,
+    "PERSDOC3": PERSDOC3,
+    "MEDCOST1": MEDCOST1,
+    "CHECKUP1": CHECKUP1,
+    "SLEPTIM1": SLEPTIM1,
+    "CVDCRHD4": CVDCRHD4,
+    "CVDSTRK3": CVDSTRK3,
+    "CHCOCNC1": CHCOCNC1,
+    "CHCCOPD3": CHCCOPD3,
+    "ADDEPEV3": ADDEPEV3,
+    "CHCKDNY2": CHCKDNY2,
+    "DIABETE4": DIABETE4,
+    "EDUCA": EDUCA,
+    "VETERAN3": VETERAN3,
+    "CHILDREN": CHILDREN,
+    "INCOME3": INCOME3,
+    "DECIDE": DECIDE,
+    "DIFFALON": DIFFALON,
+    "COVIDPOS": COVIDPOS,
+    "PREDIAB2": PREDIAB2,
+    "CNCRDIFF": CNCRDIFF,
+    "LSATISFY": LSATISFY,
+    "EMTSUPRT": EMTSUPRT,
+    "SDHISOLT": SDHISOLT,
+    "SDHEMPLY": SDHEMPLY,
+    "FOODSTMP": FOODSTMP,
+    "SDHFOOD1": SDHFOOD1,
+    "SDHBILLS": SDHBILLS,
+    "SDHUTILS": SDHUTILS,
+    "SDHTRNSP": SDHTRNSP,
+    "SDHSTRE1": SDHSTRE1,
+    "QSTLANG": QSTLANG,
+    "_METSTAT": _METSTAT,
+    "_URBSTAT": _URBSTAT,
+    "_HLTHPLN": _HLTHPLN,
+    "_TOTINDA": _TOTINDA,
+    "_DRDXAR2": _DRDXAR2,
+    "_SEX": _SEX,
+    "_AGE80": _AGE80,
+    "HTM4": HTM4,
+    "WTKG3": WTKG3,
+    "_BMI5": _BMI5,
+    "_RFBING6": _RFBING6,
+    "_DRNKWK2": _DRNKWK2,
+    "_RFDRHV8": _RFDRHV8,
+    "_ASTHMS1_2.0": _ASTHMS1_2,
+    "_ASTHMS1_3.0": _ASTHMS1_3,
+    "RENTHOM1_1.0": RENTHOM1_1,
+    "RENTHOM1_3.0": RENTHOM1_3,
+    "_BMI5CAT_1.0": _BMI5CAT_1,
+    "_BMI5CAT_2.0": _BMI5CAT_2,
+    "_BMI5CAT_3.0": _BMI5CAT_3,
+    "_RACEPR1_2.0": _RACEPR1_2,
+    "_RACEPR1_3.0": _RACEPR1_3,
+    "_RACEPR1_4.0": _RACEPR1_4,
+    "_RACEPR1_5.0": _RACEPR1_5,
+    "_RACEPR1_6.0": _RACEPR1_6,
+    "_RACEPR1_7.0": _RACEPR1_7,
+    "_SMOKGRP_1.0": _SMOKGRP_1,
+    "_SMOKGRP_3.0": _SMOKGRP_3,
+    "EMPLOY1_3.0": EMPLOY1_3,
+    "EMPLOY1_5.0": EMPLOY1_5,
+    "EMPLOY1_7.0": EMPLOY1_7,
+    "EMPLOY1_8.0": EMPLOY1_8,
+    "MARITAL_2.0": MARITAL_2,
+    "MARITAL_5.0": MARITAL_5,
+}
 
 # Custom CSS for the button
 st.markdown(
@@ -820,7 +823,8 @@ if st.button(
     help="Click to trigger prediction",
 ):
     # Assuming `predict` is your function and `lst_inputs` is your input list
-    prediction = predict([lst_inputs])
+    input_data = pd.DataFrame(dict_inputs, index=[0])
+    prediction = predict(input_data)
 
     # Display the prediction with custom styling
     st.markdown(
