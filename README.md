@@ -2,7 +2,7 @@
 
 Capstone repository for SIADS Summer 2024 Team DNA (Deepak, Noah, Anuvrat) @ University of Michigan, School of Information, Ann Arbor, MI, USA.
 
-Page modified on : 2024 August, 13
+Page modified on : 2024-August-13
 
 ## Table of Contents
 
@@ -37,10 +37,13 @@ We have used Python based tech stack. Raw databases were obtained in SAS format 
 
 ## Folder Structure
 
+The repository is structured across multiple folders and files as specified below.
+
         root
         ├── ...
         ├── .streamlit                              # Configuration file fro Streamlit application
         ├── appdata                                 # Media files for Streamlit application
+        │ ├── backgroundimage2.webp                 # Background image used for the application
         ├── data                                    # Data files to train the model
         │ ├── BRFSS2022_modeling_data.pkl           # ZIP file containing the final modeling data
         │ ├── BRFSS2022_raw.pkl                     # Raw pickled data
@@ -57,6 +60,7 @@ We have used Python based tech stack. Raw databases were obtained in SAS format 
         │ ├── load_data.ipynb                       # Load input files for further processing
         │ ├── model.ipynb                           # Experiment with various modelling techniques including LR, RF, XGB, LGBM, DT
         │ ├── streamlit.py                          # Python code to create the Streamlit application
+        ├── .gitignore                              # Specifies intentionally untracked files that Git should ignore
         ├── LICENSE                                 # GNU General Public License v3.0
         ├── README.md                               # This file with overview of the repository
         └── requirements.txt                        # Project dependencies
