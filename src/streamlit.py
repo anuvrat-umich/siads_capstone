@@ -827,3 +827,8 @@ if st.button(
         f"<h3 style='font-family:Arial; font-weight:bold; font-size: 20px;'>The predicted risk of heart attack is: {prediction}</h3>",
         unsafe_allow_html=True,
     )
+
+st.markdown(
+    f"<h5 style='font-family:Arial; font-weight:bold; font-size: 10px;'>Data Source: Centers for Disease Control and Prevention (CDC). Behavioral Risk Factor Surveillance System Survey Data. Atlanta, Georgia: U.S. Department of Health and Human Services, Centers for Disease Control and Prevention, 2022</h5>",
+    unsafe_allow_html=True,
+)
