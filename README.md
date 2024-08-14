@@ -71,7 +71,7 @@ pip install -r requirements.txt
 
 ## Data
 
-We have chosen the Behavioral Risk Factor Surveillance System (BRFSS) data set which is a telephonic survey of US residents conducted by the CDC every year about their health-related risk behaviors, chronic health conditions, and use of preventive services. The data can be downloaded from [CDC website](https://www.cdc.gov/brfss/annual_data/annual_2022.html)
+We have chosen the Behavioral Risk Factor Surveillance System (BRFSS) data set which is a telephonic survey of US residents conducted by the CDC every year about their health-related risk behaviors, chronic health conditions, and use of preventive services. The data can be downloaded from [CDC website](https://www.cdc.gov/brfss/annual_data/annual_2022.html) along with additional information on the data, including [Codebook](https://github.com/anuvrat-umich/siads_capstone/blob/main/doc/USCODE22_LLCP_102523.HTML) and [Questionnaire](https://github.com/anuvrat-umich/siads_capstone/blob/main/doc/2022-BRFSS-Questionnaire-508.pdf) located under [../doc](https://github.com/anuvrat-umich/siads_capstone/tree/main/doc) folder.
 
 We have used 2022 BRFSS Data (SAS Transport Format) for this project. As already stated, it is a highly uncompressed format. We have converted the raw data to a Pandas DataFrame and have included a pickled copy of the same in the repository under [../data/BRFSS2022_raw.pkl](https://github.com/anuvrat-umich/siads_capstone/blob/main/data/BRFSS2022_raw.pkl)
 
