@@ -1,6 +1,7 @@
 # Risk Pulse - Developed by Team DNA (August 2024)
 
-Capstone repo for SIADS Summer 2024 Team DNA (Deepak, Noah, Anuvrat) @ University of Michigan, School of Information, Ann Arbor, MI, USA
+Capstone repository for SIADS Summer 2024 Team DNA (Deepak, Noah, Anuvrat) @ University of Michigan, School of Information, Ann Arbor, MI, USA.
+
 Page modified on : 2024 August, 13
 
 ## Table of Contents
@@ -41,12 +42,13 @@ We have used Python based tech stack. Raw databases were obtained in SAS format 
         ├── .streamlit                              # Configuration file fro Streamlit application
         ├── appdata                                 # Media files for Streamlit application
         ├── data                                    # Data files to train the model
-        │ ├── BRFSS2022_modeling_data.zip           # ZIP file containing the final modeling data
+        │ ├── BRFSS2022_modeling_data.pkl           # ZIP file containing the final modeling data
         │ ├── BRFSS2022_raw.pkl                     # Raw pickled data
         ├── doc                                     # Documentation files to understand the data better
         │ ├── 2022-BRFSS-Questionnaire-508.pdf      # 2022 BRFSS Questionnaire
         │ ├── USCODE22_LLCP_102523.html             # Codebook
         ├── models                                  # Trained models
+        │ ├── dt_model.pkl                          # Trained Decision Tree model
         │ ├── lgbm_model.pkl                        # Trained LGBM model
         │ ├── lr_model.pkl                          # Trained Logistic Regression model
         │ ├── rf_model.zip                          # Trained Random Forest model (Unzipped>100MB)
@@ -77,7 +79,7 @@ We have used 2022 BRFSS Data (SAS Transport Format) for this project. As already
 
 <b>[../src/load_data.ipynb](https://github.com/anuvrat-umich/siads_capstone/blob/main/src/load_data.ipynb):</b> This notebook reads the [../data/BRFSS2022_raw.pkl](https://github.com/anuvrat-umich/siads_capstone/blob/main/data/BRFSS2022_raw.pkl) and applies relevant data cleanup (dropping unwanted columns) and feature engineering (encoding some survey columns as binary, custom binning or one hot encoding) steps. Some of the reasons to drop columns included low fill rate, a lot of non-informative responses, and multicollinearity. We also dropped some records that had an abundance of non-informative responses (missing, not sure, don't know, etc.). Specific imputation methods including zero imputation, mean imputation, and majority class imputation were used for specific features. The file used downstream for modeling is saved as [../data/BRFSS2022_modeling_data.pkl](https://github.com/anuvrat-umich/siads_capstone/blob/main/data/BRFSS2022_modeling_data.pkl)
 
-## Models
+## Methods
 
 <b>[../src/model.ipynb](https://github.com/anuvrat-umich/siads_capstone/blob/main/src/model.ipynb):</b> We have experimented with various modelling techniques in this notebook. The first step is to clean up the data and experiment with under/oversampling. The next step is to train and evaluate different machine learning models across various families - including linear models (logistic regression), Decision Trees, and tree based ensembles (Random Forest, XGBoost, Light GBM). The notebook follows a fixed structure with similar blocks appearing for each model category.
 
