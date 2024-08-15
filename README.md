@@ -19,11 +19,11 @@ Page modified on : 2024-August-13
 
 ## Introduction
 
-Risk Pulse is an application to predict risk of Heart Attack / Myocardial Infarction based on few user inputs including demographic information such as age, gender, height, weight, history of angina or coronary heart disease, diabetes, lack of exercise, obesity, smoking, use of alcohol, health status, and other comorbidities. It takes user ~5 minutes to provide the inputs. The prediction takes place within a second. The prediction is done using an experimental, educational Machine Learning model built using public data and should not be considered medical advice. Please consult your doctor or a health care professional to talk about your situation.
+Risk Pulse is an application to predict the risk of Heart Attack / Myocardial Infarction based on a few user inputs including demographic information such as age, gender, height, weight, history of angina or coronary heart disease, diabetes, lack of exercise, obesity, smoking, use of alcohol, health status, and other comorbidities. It takes the user ~5 minutes to provide the inputs. The prediction takes place within a second. The prediction is made using an experimental, educational Machine Learning model built using public data and should not be considered medical advice. Please consult your doctor or a health care professional to discuss your situation.
 
 ## Application
 
-The application can be accessed at [Risk Pulse](https://myocardial-infarction.streamlit.app/). The application works equally well on traditional computing devices (laptop/desktop) and mobile devices (ipad/iphone/android). It may take a couple of seconds to open the first time you click the link. The user is asked a total of 50 questions (42 radio buttons, 8 sliders). However, the application is pre-filled for an "average" respondent using historical median values for each specific question to help the user easily fill the form.
+The application can be accessed at [Risk Pulse](https://myocardial-infarction.streamlit.app/). The application works equally well on traditional computing devices (laptop/desktop) and mobile devices (iPad/iPhone/Android). It may take a couple of seconds to open the first time you click the link. The user is asked 50 questions (42 radio buttons, 8 sliders). However, the application is pre-filled for an "average" respondent using historical median values for each specific question to help the user easily fill out the form.
 
 <b>[../src/streamlit.py](https://github.com/anuvrat-umich/siads_capstone/blob/main/src/streamlit.py) </b> contains the code base to develop the application. The background for the application is saved under [../appdata](https://github.com/anuvrat-umich/siads_capstone/tree/main/appdata). Streamlit configuration file is saved under [../.streamlit/config.toml](https://github.com/anuvrat-umich/siads_capstone/blob/main/.streamlit/config.toml).
 
@@ -59,6 +59,7 @@ The repository is structured across multiple folders and files as specified belo
         ├── src                                     # Source code
         │ ├── load_data.ipynb                       # Load input files for further processing
         │ ├── model.ipynb                           # Experiment with various modelling techniques including LR, RF, XGB, LGBM, DT
+        │ ├── shap.ipynb                     # Use SHAP to explain feature importance for tree ensemble models
         │ ├── streamlit.py                          # Python code to create the Streamlit application
         ├── .gitignore                              # Specifies intentionally untracked files that Git should ignore
         ├── LICENSE                                 # GNU General Public License v3.0
@@ -99,7 +100,7 @@ The best models across each model family were pickled and saved at the end of wo
 
 Heart disease is the leading cause of death for men, women, and people of most racial and ethnic groups. In the United States, someone has a heart attack every 40 seconds. About 1 in 5 heart attacks are silent—the damage is done, but the person is not aware of it. All of these facts are taken from [CDC](https://www.cdc.gov/heart-disease/data-research/facts-stats/index.html). Early identification of risks of heart attack is critical to minimize the damage and possibly work towards making better lifestyle choices that can reduce the risk itself.
 
-Through this work we present users with the ability to run what-if scenarios to gauge their potential risk of a heart attack. It is important to note, many of the risk factors our outside a patients ability to control.
+Through this work we present users with the ability to run what-if scenarios to gauge their potential risk of a heart attack. It is important to note that many of the risk factors are outside a patient's ability to control.
 
 Now this is in itself not a novel problem or a solution thereof, but public access to such solutions remain limited. For example, we tried to use Cleveland Clinic's [ASCVD risk calculator ](https://my.clevelandclinic.org/health/articles/17085-heart-risk-factor-calculators) but the page has been down for maintenance as last reported. Moreover, transparency, interpretability, explanability and public accesss to data and methodologies remain major challenges. We have open sourced our work under public GNU license including the data and model.
 
