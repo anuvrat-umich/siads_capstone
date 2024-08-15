@@ -50,7 +50,7 @@ import pandas as pd
 
 def predict(data):
     clf = joblib.load("./models/lr_model.pkl")
-    threshold = 0.6
+    threshold = 0.5
 
     # Define scaler to scale the data
     # scaler = StandardScaler()
