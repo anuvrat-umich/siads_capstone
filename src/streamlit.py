@@ -122,11 +122,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins.</h3>",
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 18px;'>Hello! This app predicts the risk of heart attack based on a few user inputs. Time to complete: ~5 mins.</h3>",
     unsafe_allow_html=True,
 )
 st.markdown(
-    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 12px;'>Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
+    f"<h3 style='font-family:Arial; font-weight:normal; font-size: 18px;'>Disclaimer: This is an experimental, educational model built using public data and should not be considered medical advice. \
     Please consult your doctor or a health care professional to talk about your situation.</h3>",
     unsafe_allow_html=True,
 )
