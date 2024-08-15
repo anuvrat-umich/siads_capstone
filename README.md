@@ -59,6 +59,7 @@ The repository is structured across multiple folders and files as specified belo
         ├── src                                     # Source code
         │ ├── load_data.ipynb                       # Load input files for further processing
         │ ├── model.ipynb                           # Experiment with various modelling techniques including LR, RF, XGB, LGBM, DT
+        │ ├── shap.ipynb                     # Use SHAP to explain feature importance for tree ensemble models
         │ ├── streamlit.py                          # Python code to create the Streamlit application
         ├── .gitignore                              # Specifies intentionally untracked files that Git should ignore
         ├── LICENSE                                 # GNU General Public License v3.0
